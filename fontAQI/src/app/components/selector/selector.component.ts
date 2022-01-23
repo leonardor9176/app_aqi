@@ -67,6 +67,7 @@ export class SelectorComponent implements OnInit {
         })
       })
     } catch (error) {
+      this.loading = false
       console.log('Error al obtener estaciones.', error)
     }
     if (this.stations.length) {
