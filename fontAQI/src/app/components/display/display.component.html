@@ -1,0 +1,28 @@
+<div class="container">
+    <div class=" row">
+        <div class="col">
+            <select style="width:100%; max-width:100%;" name="stations" (change)="stationSelected($event)">
+                <option value="">Elige una estación</option>
+                <option [value]="station?.uid" *ngFor="let station of stations">{{station?.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div *ngIf="aqi" [style.background-color]="bgColor">
+        <div class=" row">
+            <div class="col">
+                <div>
+                    <p class="display-2 text-center">{{aqi}}</p>
+                </div>
+            </div>
+        </div>
+        <div class=" row">
+            <div class="col">
+                <div>
+                    <p class="display-2 text-center">
+                        <i class="em {{em}}" aria-role="presentation"></i>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
