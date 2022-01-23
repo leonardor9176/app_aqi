@@ -16,8 +16,8 @@ export class SelectorComponent implements OnInit {
   public sub = false
 
   loading = false
-  // inputCity = 'Bogota'
   displayDisplayComp = false
+  dataFound = false
   stations: any
 
   constructor(
@@ -47,6 +47,12 @@ export class SelectorComponent implements OnInit {
     this.sub = false
   }
 
+  validateEnter(event: any) {
+    if (event.keyCode == 13) {
+      this.validate()
+    }
+  }
+
   async searchCity() {
     this.loading = true
     this.displayDisplayComp = false
@@ -56,19 +62,19 @@ export class SelectorComponent implements OnInit {
       this.stations = await new Promise((resolve) => {
         this.apiAqi.getStationsByCity(wantedCity).subscribe((res: any) => {
 
+          this.displayDisplayComp = true
           resolve(res.data)
         })
       })
-      this.displayDisplayComp = true
     } catch (error) {
       console.log('Error al obtener estaciones.', error)
     }
-    this.loading = false
-  }
-
-  validateEnter(event: any) {
-    if (event.keyCode == 13) {
-      this.validate()
+    if (this.stations.length) {
+      this.dataFound = true
     }
+    else {
+      this.dataFound = false
+    }
+    this.loading = false
   }
 }

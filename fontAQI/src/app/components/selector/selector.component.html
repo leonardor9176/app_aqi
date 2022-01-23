@@ -8,26 +8,30 @@
         <div class="row my-4">
 
             <div class="col">
-                <input
-                    type="text"
-                    formControlName="city"
-                    class="form-control"
+                <input type="text" formControlName="city" class="form-control"
                     [ngClass]="{'is-invalid' : sub && f['city'].errors, 'is-valid' : city.valid && (city.dirty || city.touched)}"
-                    (keyup)="validateEnter($event)"
-                />
+                    (keyup)="validateEnter($event)" />
             </div>
             <div class="col">
                 <button type="button" (click)="validate()">Buscar</button>
             </div>
         </div>
-        <div class="row" *ngIf="displayDisplayComp">
-            <p class="display-6">Hemos encontrado algunas estaciones disponibles para consultar:</p>
-            <div class="col">
-                <app-display [stations]="stations"></app-display>
+        <div *ngIf="displayDisplayComp">
+            <div class="row" *ngIf="dataFound; else noData">
+                <p class="display-6">Hemos encontrado algunas estaciones disponibles para consultar:</p>
+                <div class="col">
+                    <app-display [stations]="stations"></app-display>
+                </div>
+                <div class="col">
+                    <app-display [stations]="stations"></app-display>
+                </div>
             </div>
-            <div class="col">
-                <app-display [stations]="stations"></app-display>
-            </div>
+            <ng-template #noData>
+                <div class="text-center">
+                    <p class="display-6">Ups, algo salió mal</p>
+                    <i class="em em-confused display-6" aria-role="presentation"></i>
+                </div>
+            </ng-template>
         </div>
         <div *ngIf="loading">
             <p>loading</p>

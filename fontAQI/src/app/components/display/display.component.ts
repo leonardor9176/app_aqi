@@ -26,7 +26,6 @@ export class DisplayComponent implements OnInit {
 
   stationSelected(event: any) {
     const uid = event.target.value
-    console.log(uid)
     this.station = this.stations.find((station: any) => station.uid == uid)
     this.aqi = this.station.aqi
     switch (true) {
